@@ -8,12 +8,13 @@ import EntryContext from "./context/EntryContext";
 
 import Filters from "./Filters";
 import Header from "./Header";
-
+import { getMonth } from './Filters/filterOptions';
 import { ITimeEntry } from "./interface";
 
 const Reports = () => {
+
   const filterIntialValues = {
-    dateRange: { label: "All", value: "" },
+    dateRange: { value: "this_month", label: getMonth(true) },
     clients: [],
     teamMember: [],
     status: [],
@@ -31,7 +32,7 @@ const Reports = () => {
   const [filterCounter, setFilterCounter] = useState(0);
 
   const fetchTimeEntries = async () => {
-    const res = await reports.get("");
+    const res = await reports.get(`&date_range=this_month`);
     if (res.status == 200) {
       setTimeEntries(res.data.entries);
       getFilterOptions(res.data.filterOptions);
@@ -93,7 +94,7 @@ const Reports = () => {
       setSelectedFilter({ ...selectedFilter, [key]: { label, value: "" } });
     }
   };
-
+  console.log("selectedFilter ----> ", selectedFilter);
   return (
     <div>
       <EntryContext.Provider value={{

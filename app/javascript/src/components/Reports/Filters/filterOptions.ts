@@ -16,7 +16,7 @@ const getWeek = (isCurrentWeek) => {
     `Last Week (${completeCurrentDay} - ${completeLastWeekDay})`;
 };
 
-const getMonth = (isCurrentMonth) => {
+export const getMonth = (isCurrentMonth) => {
   const currentDate = new Date();
 
   const monthCount = isCurrentMonth ? dayjs(currentDate) : dayjs(currentDate).subtract(1, "month");
