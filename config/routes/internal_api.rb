@@ -9,6 +9,7 @@ namespace :internal_api, defaults: { format: "json" } do
     resources :timesheet_entry do
       collection do
         resource :bulk_action, only: [:update, :destroy], controller: "timesheet_entry/bulk_action"
+        post :import, to: "timesheet_entry#import"
       end
     end
     resources :projects, only: [:index, :show, :create, :update, :destroy]

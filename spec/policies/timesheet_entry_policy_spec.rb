@@ -53,6 +53,12 @@ RSpec.describe TimesheetEntryPolicy, type: :policy do
       end
     end
 
+    permissions :import? do
+      it "grants permission to import" do
+        expect(subject).to permit(user)
+      end
+    end
+
     describe "scope" do
       it "allows current workspace timesheet entries" do
         expect(scope.to_a).to match_array([timesheet_entry])
@@ -97,6 +103,12 @@ RSpec.describe TimesheetEntryPolicy, type: :policy do
       it "is not permitted to destroy client in different company" do
         client.update(company_id: company2.id)
         expect(subject).not_to permit(user, timesheet_entry)
+      end
+    end
+
+    permissions :import? do
+      it "grants permission to import" do
+        expect(subject).to permit(user)
       end
     end
 

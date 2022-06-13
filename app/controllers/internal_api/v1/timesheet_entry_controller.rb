@@ -37,6 +37,10 @@ class InternalApi::V1::TimesheetEntryController < InternalApi::V1::ApplicationCo
     render json: { notice: I18n.t("timesheet_entry.destroy.message") } if current_timesheet_entry.destroy
   end
 
+  def import
+    table = CSV.parse(params[:file].read, headers: true)
+  end
+
   private
 
     def current_project

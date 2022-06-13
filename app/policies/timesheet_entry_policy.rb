@@ -22,6 +22,10 @@ class TimesheetEntryPolicy < ApplicationPolicy
     update?
   end
 
+  def import?
+    user_owner_or_admin?
+  end
+
   class Scope < ApplicationPolicy
     attr_reader :user, :scope
 

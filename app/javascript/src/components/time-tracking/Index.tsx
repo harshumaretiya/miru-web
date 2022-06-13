@@ -49,6 +49,7 @@ const TimeTracking: React.FC<Iprops> = ({
   const [isWeeklyEditing, setIsWeeklyEditing] = useState<boolean>(false);
   const [selectedEmployeeId, setSelectedEmployeeId] = useState<number>(userId);
   const [allEmployeesEntries, setAllEmployeesEntries] = useState<object>({});
+  const [file, setFile] = useState<any>();
 
   // sorting by client's name
   clients.sort((a: object, b: object) => a["name"].localeCompare(b["name"]));
@@ -224,6 +225,16 @@ const TimeTracking: React.FC<Iprops> = ({
     setWeeklyData(() => weekArr);
   };
 
+  const handleFileImport = async () => {
+    if (file) {
+      let formData = new FormData();
+      formData.append("file", file);
+      const res = await timesheetEntryApi.importCsv(formData);
+      debugger
+      // const res = await timesheetEntryApi.importCsv()
+    };
+  };
+
   return (
     <>
       <ToastContainer autoClose={TOASTER_DURATION} />
@@ -244,6 +255,19 @@ const TimeTracking: React.FC<Iprops> = ({
             ))}
           </nav>
           <div>
+            {
+              isAdmin && (
+                <div>
+                  <input
+                    type="file"
+                    accept=".csv, .xlsx, .xls"
+                    name="timesheet_entry"
+                    onChange={ ({ target: { files } }) => setFile(files[0]) }
+                  />
+                  <button type="submit" onClick={handleFileImport}>Import</button>
+                </div>
+              )
+            }
             {isAdmin && (
               <select value={selectedEmployeeId} onChange={(e) => setSelectedEmployeeId(Number(e.target.value))} className="items-center ">
                 {
