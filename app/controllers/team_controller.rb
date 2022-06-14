@@ -10,6 +10,12 @@ class TeamController < ApplicationController
     render :index, locals: { query:, teams: }
   end
 
+  def delete_modal
+    puts "********************"
+    authorize user, policy_class: TeamPolicy
+    @user = user
+  end
+
   def edit
     authorize user, policy_class: TeamPolicy
     @user = user
@@ -37,6 +43,8 @@ class TeamController < ApplicationController
     end
 
     def user
+      puts "xxxxxxxxxxxxx"
+      puts "xxxxxxxxxxxxxyy", params[:id]
       @_user ||= User.kept.find(params[:id])
     end
 

@@ -45,7 +45,9 @@ Rails.application.routes.draw do
 
   resources :time_tracking, only: [:index], path: "time-tracking"
 
-  resources :team, only: [:index, :update, :destroy, :edit]
+  resources :team, only: [:index, :update, :destroy, :edit] do
+    get :delete_modal, on: :member
+  end
 
   resources :reports, only: [:index]
   resources :workspaces, only: [:update]

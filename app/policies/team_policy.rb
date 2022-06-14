@@ -5,6 +5,10 @@ class TeamPolicy < ApplicationPolicy
     user_owner_or_admin?
   end
 
+  def delete_modal?
+    user_owner_or_admin?
+  end
+
   def update?
     user_owner_or_admin?
   end
