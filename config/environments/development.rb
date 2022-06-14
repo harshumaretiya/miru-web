@@ -39,7 +39,7 @@ Rails.application.configure do
   config.active_storage.service = :local
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
 
   config.action_mailer.perform_caching = false
 
@@ -72,10 +72,10 @@ Rails.application.configure do
 
   # Action Mailer Configuration
   host = ENV.fetch("APP_BASE_URL", "localhost")
-  config.action_mailer.default_url_options = { host: }
+  config.action_mailer.default_url_options = { host: "localhost", port: "3000" }
   config.action_mailer.asset_host = host
 
-  config.action_mailer.delivery_method = ENV.fetch("MAILER_DELIVERY_METHOD", "letter_opener").to_sym
+  config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
 
   Rails.application.config.after_initialize do

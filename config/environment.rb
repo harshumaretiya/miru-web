@@ -8,11 +8,11 @@ Rails.application.initialize!
 
 # Sendgrid config
 ActionMailer::Base.smtp_settings = {
-  user_name: ENV["SENDGRID_USERNAME"],
-  password: ENV["SENDGRID_PASSWORD"],
-  domain: ENV["SMTP_DOMAIN"],
+  user_name: "apikey",
+  password: "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",
+  domain: "saeloun.com",
   address: "smtp.sendgrid.net",
-  port: ENV["SMTP_PORT"],
-  authentication: :plain,
+  port: 587,
+  authentication: "plain",
   enable_starttls_auto: true
 }
